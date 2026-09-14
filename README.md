@@ -4,9 +4,9 @@
 - **Shift KRS:** Shift D
 - **Shift Sekarang:** Shift I
 
-## Penjelasan Hasil Praktikum 2
-Pada Praktikum 2 ini, saya telah mempelajari dan menerapkan Material Design 3 (MD3) dengan Jetpack Compose. Saya melakukan kustomisasi skema warna (Color Scheme) dan tipografi secara terpusat pada file `Color.kt`, `Theme.kt`, dan `Type.kt` agar tampilan konsisten dan mendukung perpaduan role-based styling. Selanjutnya, saya membuat struktur multi-halaman yang menghubungkan `BasicInfoScreen` (informasi awal) dan `HubungiKamiScreen` (formulir) menggunakan `NavController` dan `NavHost`. Pada formulir, saya juga mengimplementasikan kerangka `Scaffold`, `OutlinedTextField` untuk input data, serta `Snackbar` berbasis _coroutine_ sebagai pesan _feedback_ non-intrusif saat tombol ditekan.
+## Hasil Praktikum 2
 
-*(Silakan simpan hasil screenshot aplikasi Anda dengan nama file `screenshot.png` di folder yang sama dengan README ini, gambar akan otomatis muncul di bawah)*
+![Halaman Utama](open.png)
+![Halaman Hubungi Kami](hubungi_kami.png)
 
-![Hasil Praktikum 2](screenshot.png)
+Pada praktikum 2 ini, saya belajar mengatur warna dan ukuran huruf pada aplikasi menggunakan fitur Material Design 3. Saya juga membuat dua halaman berbeda yang bisa saling terhubung saat tombolnya ditekan. Terakhir, saya membuat kotak isian untuk mengirim pesan dan menambahkan notifikasi kecil yang muncul di bagian bawah layar.
