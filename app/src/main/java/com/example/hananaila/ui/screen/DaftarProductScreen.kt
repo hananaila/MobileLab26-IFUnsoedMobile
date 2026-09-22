@@ -142,7 +142,6 @@ fun DaftarProdukScreen() {
     }
 
     val context = LocalContext.current
-    val products = DummyData.products
 
     Scaffold(
         topBar = {
