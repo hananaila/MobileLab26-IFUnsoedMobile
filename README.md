@@ -6,12 +6,14 @@
 
 ## Hasil Praktikum 2
 
-![Halaman Utama](open.png)
-![Halaman Hubungi Kami](hubungi_kami.png)
+![Halaman Utama](pertemuan2/open.png)
+![Halaman Hubungi Kami](pertemuan2/hubungi_kami.png)
 
 Pada praktikum 2 ini, saya belajar mengatur warna dan ukuran huruf pada aplikasi menggunakan fitur Material Design 3, membuat dua halaman berbeda yang bisa saling terhubung saat tombolnya diclick, dan membuat kotak isian untuk mengirim pesan dan menambahkan notifikasi kecil yang muncul di bagian bawah layar.
 
 ## Hasil Praktikum 3
+
+[▶️ Lihat Demo Aplikasi](pertemuan3/pertemuan3.mp4)
 
 Pada praktikum pertemuan 3 ini, saya belajar membuat *Dynamic Lists* dan *Lazy Layouts* menggunakan Jetpack Compose. Hal yang diterapkan meliputi:
 - Pembuatan `Data Class` dan data *dummy* untuk Kategori dan Produk.
