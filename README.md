@@ -21,3 +21,14 @@ Pada praktikum pertemuan 3 ini, saya belajar membuat *Dynamic Lists* dan *Lazy L
 - Implementasi `LazyVerticalGrid` untuk daftar produk dalam format *grid* 2 kolom yang hemat memori.
 - Menambahkan fungsi *filter* interaktif sehingga produk yang tampil menyesuaikan kategori yang diklik pengguna.
 - Pratinjau aplikasi dalam mode terang (*Light*) dan gelap (*Dark*).
+
+## Hasil Praktikum 4
+
+https://github.com/user-attachments/assets/7f8ac818-093e-4def-ac0b-e153bd3c509c
+
+Pada praktikum pertemuan 4 ini, saya belajar tentang konsep *State*, *Recomposition*, dan *UI Lifecycle* dalam arsitektur modern Jetpack Compose. Hal yang diterapkan meliputi:
+- **State & Recomposition**: Mengelola data yang berubah-ubah menggunakan `mutableStateOf` dan `rememberSaveable`.
+- **State Hoisting**: Memisahkan komponen UI menjadi *Stateful* (pengelola data) dan *Stateless* (penampil UI).
+- **Asynchronous (Coroutine)**: Menggunakan `LaunchedEffect` untuk menjalankan simulasi *loading* pengambilan data di latar belakang.
+- **Validasi Form**: Menggabungkan berbagai aturan validasi interaktif seperti pengecekan format email, minimal karakter, pilihan pada *Dropdown*, upload gambar dari galeri, hingga `Checkbox` persetujuan.
+- **Navigasi (*NavController*)**: Melakukan transisi antar layar (Daftar Produk, Hubungi Kami, Detail Produk) dan mengirimkan argumen seperti parameter `productId`.
