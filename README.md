@@ -13,7 +13,7 @@ Pada praktikum 2 ini, saya belajar mengatur warna dan ukuran huruf pada aplikasi
 
 ## Hasil Praktikum 3
 
-[▶️ Lihat Demo Aplikasi](pertemuan3/pertemuan3.mp4)
+<video src="pertemuan3/pertemuan3.mp4" controls width="360"></video>
 
 Pada praktikum pertemuan 3 ini, saya belajar membuat *Dynamic Lists* dan *Lazy Layouts* menggunakan Jetpack Compose. Hal yang diterapkan meliputi:
 - Pembuatan `Data Class` dan data *dummy* untuk Kategori dan Produk.
