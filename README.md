@@ -24,11 +24,6 @@ Pada praktikum pertemuan 3 ini, saya belajar membuat *Dynamic Lists* dan *Lazy L
 
 ## Hasil Praktikum 4
 
-https://github.com/user-attachments/assets/7f8ac818-093e-4def-ac0b-e153bd3c509c
+https://github.com/user-attachments/assets/70badc26-d8b5-4a12-b02b-d887b9c10847
 
-Pada praktikum pertemuan 4 ini, saya belajar tentang konsep *State*, *Recomposition*, dan *UI Lifecycle* dalam arsitektur modern Jetpack Compose. Hal yang diterapkan meliputi:
-- **State & Recomposition**: Mengelola data yang berubah-ubah menggunakan `mutableStateOf` dan `rememberSaveable`.
-- **State Hoisting**: Memisahkan komponen UI menjadi *Stateful* (pengelola data) dan *Stateless* (penampil UI).
-- **Asynchronous (Coroutine)**: Menggunakan `LaunchedEffect` untuk menjalankan simulasi *loading* pengambilan data di latar belakang.
-- **Validasi Form**: Menggabungkan berbagai aturan validasi interaktif seperti pengecekan format email, minimal karakter, pilihan pada *Dropdown*, upload gambar dari galeri, hingga `Checkbox` persetujuan.
-- **Navigasi (*NavController*)**: Melakukan transisi antar layar (Daftar Produk, Hubungi Kami, Detail Produk) dan mengirimkan argumen seperti parameter `productId`.
+Pada praktikum 4 ini, saya belajar mengelola status data (*State*) pada aplikasi agar tampilannya bisa berubah secara otomatis saat ada interaksi (*Recomposition*). Saya memisahkan logika data dari desain tampilan menggunakan teknik *State Hoisting*. Selain itu, saya juga mempraktikkan cara membuat simulasi *loading* secara asinkron agar aplikasi tidak berhenti mendadak (*freeze*), melakukan validasi untuk *form input* yang lebih rumit, serta mengatur navigasi dan perpindahan antar layar aplikasi.
