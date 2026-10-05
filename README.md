@@ -24,6 +24,12 @@ Pada praktikum pertemuan 3 ini, saya belajar membuat *Dynamic Lists* dan *Lazy L
 
 ## Hasil Praktikum 4
 
-https://github.com/user-attachments/assets/70badc26-d8b5-4a12-b02b-d887b9c10847
+https://github.com/user-attachments/assets/7f8ac818-093e-4def-ac0b-e153bd3c509c
 
-Pada praktikum 4 ini, saya belajar mengelola status data (*State*) pada aplikasi agar tampilannya bisa berubah secara otomatis saat ada interaksi (*Recomposition*). Saya memisahkan logika data dari desain tampilan menggunakan teknik *State Hoisting*. Selain itu, saya juga mempraktikkan cara membuat simulasi *loading* secara asinkron agar aplikasi tidak berhenti mendadak (*freeze*), melakukan validasi untuk *form input* yang lebih rumit, serta mengatur navigasi dan perpindahan antar layar aplikasi.
+Pada praktikum 4 ini, saya belajar mengelola status data (State) pada aplikasi agar tampilannya bisa berubah secara otomatis saat ada interaksi (Recomposition). Saya memisahkan logika data dari desain tampilan menggunakan teknik State Hoisting. Selain itu, saya juga mempraktikkan cara membuat simulasi loading secara asinkron agar aplikasi tidak berhenti mendadak (freeze), melakukan validasi untuk form input yang lebih rumit, serta mengatur navigasi dan perpindahan antar layar aplikasi.
+
+## Hasil Praktikum 5
+
+https://github.com/user-attachments/assets/4d98101f-510b-4734-a2a5-2b24b761f0c5
+
+Pada praktikum 5 ini, saya belajar mengimplementasikan arsitektur jaringan (Networking) dan pola arsitektur MVVM. Saya menggunakan library Retrofit dan Gson untuk mengambil data API berformat JSON secara dinamis dari server, serta memakai library Coil untuk merender gambar dari internet secara asinkron. Selain itu, saya juga memisahkan logika pemrosesan data ke dalam ViewModel dan mengelola status pemuatan data (Loading, Success, dan Error) di latar belakang menggunakan antarmuka StateFlow agar aplikasi tidak mengalami freeze.

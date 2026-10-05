@@ -1,4 +1,6 @@
 [versions]
+retrofit = "3.0.0"
+coil = "2.6.0"
 agp = "9.3.2"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -10,6 +12,9 @@ kotlin = "2.2.10"
 composeBom = "2026.02.01"
 
 [libraries]
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -28,4 +33,5 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
 

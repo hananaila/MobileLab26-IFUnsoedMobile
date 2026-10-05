@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.hananaila.ui.screen.DaftarProdukScreen
+import com.example.hananaila.viewmodel.ProductViewModel
 import com.example.hananaila.ui.screen.DetailProductScreen
 import com.example.hananaila.ui.screen.HubungiKamiScreen
 import com.example.hananaila.ui.theme.JualanTheme
@@ -21,9 +22,10 @@ class HomeActivity : ComponentActivity() {
         setContent {
             JualanTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "daftar_produk") {
+                val productViewModel: ProductViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    NavHost(navController = navController, startDestination = "daftar_produk") {
                     composable(route = "daftar_produk") {
-                        DaftarProdukScreen(navController = navController)
+                        DaftarProdukScreen(navController = navController, viewModel = productViewModel)
                     }
                     composable(
                         route = "detail/{productId}",
@@ -34,7 +36,8 @@ class HomeActivity : ComponentActivity() {
                         val productId = backStackEntry.arguments?.getInt("productId") ?: 0
                         DetailProductScreen(
                             productId = productId,
-                            navController = navController
+                            navController = navController,
+                            viewModel = productViewModel
                         )
                     }
                     composable(route = "hubungi_kami") {

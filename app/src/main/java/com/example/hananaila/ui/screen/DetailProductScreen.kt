@@ -24,7 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,41 +37,54 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.example.hananaila.R
-import com.example.hananaila.data.dummy.DummyData
 import com.example.hananaila.data.model.Product
-import kotlinx.coroutines.delay
+import com.example.hananaila.util.JualanConstants
+import com.example.hananaila.viewmodel.ProductUiState
+import com.example.hananaila.viewmodel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailProductScreen(productId: Int, navController: NavController?) {
+fun DetailProductScreen(productId: Int, navController: NavController?, viewModel: ProductViewModel) {
     val context = LocalContext.current
-    var isLoading by remember { mutableStateOf(true) }
-    var product by remember { mutableStateOf<Product?>(null) }
+    val uiState by viewModel.uiState.collectAsState()
     var quantity by rememberSaveable { mutableStateOf(1) }
-    
-    LaunchedEffect(key1 = productId) {
-        isLoading = true
-        delay(timeMillis = 1000) // Simulasi loading server lambat
-        product = DummyData.products.find { it.id == productId }
-        isLoading = false
-    }
 
-    StatelessDetailProduct(
-        product = product,
-        isLoading = isLoading,
-        quantity = quantity,
-        onQuantityChange = { quantity = it },
-        onBackClick = { navController?.popBackStack() },
-        onAddToCartClick = { Toast.makeText(context, "Dimasukkan: $quantity", Toast.LENGTH_SHORT).show() }
-    )
+    when (val state = uiState) {
+        is ProductUiState.Loading -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+        }
+        is ProductUiState.Error -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("Error: ${state.message}", color = MaterialTheme.colorScheme.error)
+            }
+        }
+        is ProductUiState.Success -> {
+            val product = state.products.find { it.id == productId }
+            if (product == null) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text("Produk tidak ditemukan.")
+                }
+            } else {
+                StatelessDetailProduct(
+                    product = product,
+                    quantity = quantity,
+                    onQuantityChange = { quantity = it },
+                    onBackClick = { navController?.popBackStack() },
+                    onAddToCartClick = { Toast.makeText(context, "Membeli sebanyak $quantity", Toast.LENGTH_SHORT).show() }
+                )
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StatelessDetailProduct(
-    product: Product?,
-    isLoading: Boolean,
+    product: Product,
     quantity: Int,
     onQuantityChange: (Int) -> Unit,
     onBackClick: () -> Unit,
@@ -89,57 +102,61 @@ fun StatelessDetailProduct(
             )
         }
     ) { paddingValues ->
-        if (isLoading) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-        } else if (product != null) {
-            Column(modifier = Modifier
+        Column(
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .verticalScroll(state = rememberScrollState())) {
-                val imageRes = if (product.img == "dummy_product") R.drawable.dummy_product else R.drawable.dummy_product
-                Image(painterResource(id = imageRes), contentDescription = null, modifier = Modifier
+                .verticalScroll(state = rememberScrollState())
+        ) {
+            val imageModel: Any = if (product.img == "dummy_product") {
+                R.drawable.dummy_product
+            } else {
+                "${JualanConstants.BASE_URL}img/${product.img}"
+            }
+            AsyncImage(
+                model = imageModel,
+                contentDescription = null,
+                modifier = Modifier
                     .fillMaxWidth()
-                    .height(280.dp))
-                Column(modifier = Modifier.padding(all = 16.dp)) {
-                    Text(product.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-                    Text("Rp ${product.price}", style = MaterialTheme.typography.titleLarge)
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text("Deskripsi", fontWeight = FontWeight.Bold)
-                    Text(product.description ?: "")
-                    Text("Stok: ${product.stock}")
-                    
-                    Spacer(modifier = Modifier.height(24.dp))
-                    
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text("Jumlah Beli")
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            FilledTonalIconButton(
-                                onClick = { if (quantity > 1) onQuantityChange(quantity - 1) },
-                                enabled = quantity > 1
-                            ) { Text("-") }
-                            Text(quantity.toString(), modifier = Modifier.padding(horizontal = 16.dp))
-                            FilledTonalIconButton(
-                                onClick = { if (quantity < product.stock) onQuantityChange(quantity + 1) },
-                                enabled = quantity < product.stock
-                            ) { Text("+") }
-                        }
+                    .height(280.dp)
+            )
+            Column(modifier = Modifier.padding(all = 16.dp)) {
+                Text(product.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                Text("Rp ${product.price}", style = MaterialTheme.typography.titleLarge)
+                Spacer(modifier = Modifier.height(16.dp))
+                Text("Deskripsi", fontWeight = FontWeight.Bold)
+                Text(product.description ?: "")
+                Text("Stok: ${product.stock}")
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Jumlah Beli")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        FilledTonalIconButton(
+                            onClick = { if (quantity > 1) onQuantityChange(quantity - 1) },
+                            enabled = quantity > 1
+                        ) { Text("-") }
+                        Text(quantity.toString(), modifier = Modifier.padding(horizontal = 16.dp))
+                        FilledTonalIconButton(
+                            onClick = { if (quantity < product.stock) onQuantityChange(quantity + 1) },
+                            enabled = quantity < product.stock
+                        ) { Text("+") }
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(
-                        onClick = onAddToCartClick,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp),
-                        enabled = product.stock > 0 && quantity > 0
-                    ) {
-                        Text("Tambah ke Keranjang")
-                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = onAddToCartClick,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    enabled = product.stock > 0 && quantity > 0
+                ) {
+                    Text("Tambah ke Keranjang")
                 }
             }
         }
