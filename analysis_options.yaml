@@ -1,0 +1,18 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - modul1_dart/**
+
+linter:
+  rules:
+    use_key_in_widget_constructors: false
+    prefer_const_constructors: true
+    avoid_print: false

@@ -8,10 +8,23 @@
 
 ## Hasil Praktikum Modul 1 (Bahasa Pemrograman Dart)
 
-Pada praktikum Modul 1 ini, saya mempelajari konsep dasar dan sintaksis bahasa pemrograman Dart sebagai pondasi utama pengembangan aplikasi berbasis framework Flutter. Pembelajaran dilakukan melalui praktik penulisan kode untuk memahami cara kerja program, tipe data, hingga fitur pemrograman modern pada Dart.
+Pada praktikum Modul 1 ini, saya belajar dasar-dasar bahasa pemrograman Dart sebagai persiapan untuk menggunakan framework Flutter. Materi yang dipelajari dan dipraktikkan meliputi:
+- Menjalankan program dasar Dart dan menampilkan teks menggunakan perintah `print`.
+- Menggunakan berbagai tipe data seperti `int`, `double`, `String`, `bool`, dan `var`.
+- Menerapkan perhitungan matematika, logika perbandingan, serta kontrol alur program dengan percabangan `if-else` dan perulangan `for` maupun `while`.
+- Membuat fungsi mandiri dan menerapkan konsep OOP (*Object-Oriented Programming*) dengan membuat class `Mahasiswa`.
+- Menggunakan library bawaan `dart:math`, menangani error dengan blok `try-catch`, serta membuat fungsi asinkronus menggunakan `Future`, `async`, dan `await`.
 
-Poin-poin penting yang dipelajari dan diterapkan meliputi:
-- **Struktur Program & Variabel:** Memahami fungsi utama `main()`, mencetak output ke konsol, serta penggunaan berbagai tipe data seperti `int`, `double`, `String`, `bool`, dan inferensi tipe otomatis (`var`).
-- **Operasi & Alur Kontrol:** Menerapkan operasi matematika dan logika, serta mengatur alur eksekusi program menggunakan percabangan `if-else` dan perulangan (`for` dan `while`).
-- **Modularitas & OOP:** Memisahkan logika kode ke dalam fungsi mandiri serta menerapkan paradigma Pemrograman Berorientasi Objek (OOP) melalui pembuatan *class*, konstruktor, atribut, dan *method*.
-- **Pustaka, Eksepsi, & Asinkronus:** Memanfaatkan pustaka bawaan `dart:math`, menangani kesalahan saat program berjalan (*error handling*) dengan blok `try-catch`, serta mengelola proses asinkronus menggunakan `Future`, `async`, dan `await`.
+---
+
+## Hasil Praktikum Modul 2 (Pengenalan & Desain Framework Flutter)
+
+<!-- Ganti baris di bawah ini dengan link video rekaman atau screenshot demo aplikasi Anda -->
+<!-- Format: https://github.com/user-attachments/assets/<ID-FILE> -->
+
+Pada praktikum Modul 2 ini, saya belajar dasar-dasar pengembangan aplikasi mobile menggunakan framework Flutter, mulai dari memahami struktur proyek hingga merancang antarmuka (UI). Hal-hal yang telah saya terapkan meliputi:
+- Membuat tampilan awal aplikasi (*Hello World*) menggunakan `StatelessWidget`.
+- Mengatur tata letak elemen antarmuka secara vertikal dengan widget `Column` dan horizontal dengan widget `Row`.
+- Membuat form input data barang (`ProdukForm`) menggunakan `StatefulWidget` dan `TextEditingController` untuk menangkap input kode, nama, dan harga produk.
+- Menerapkan navigasi antar halaman menggunakan `Navigator.push` untuk mengirimkan data produk dari form ke halaman `ProdukDetail`.
+- Menampilkan daftar data produk secara terstruktur menggunakan widget `ListView` dengan tampilan `Card` dan `ListTile` pada `ProdukPage`.
