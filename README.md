@@ -28,3 +28,20 @@ Pada praktikum Modul 2 ini, saya belajar dasar-dasar pengembangan aplikasi mobil
 - Membuat form input data barang (`ProdukForm`) menggunakan `StatefulWidget` dan `TextEditingController` untuk menangkap input kode, nama, dan harga produk.
 - Menerapkan navigasi antar halaman menggunakan `Navigator.push` untuk mengirimkan data produk dari form ke halaman `ProdukDetail`.
 - Menampilkan daftar data produk secara terstruktur menggunakan widget `ListView` dengan tampilan `Card` dan `ListTile` pada `ProdukPage`.
+
+---
+
+## Hasil Praktikum Modul 3 (Routes, Side Menu, Login dan Local Storage)
+
+<!-- Ganti baris di bawah ini dengan link video rekaman atau screenshot demo aplikasi Anda -->
+<!-- Format: https://github.com/user-attachments/assets/<ID-FILE> -->
+
+Pada praktikum Modul 3 ini, saya belajar mengimplementasikan sistem autentikasi sederhana, penyimpanan data lokal, navigasi rute, serta menu navigasi samping (side menu/drawer) pada framework Flutter. Hal-hal yang telah saya terapkan meliputi:
+- Menambahkan dan mengonfigurasi dependencies pihak ketiga, yaitu `shared_preferences`, pada file `pubspec.yaml` untuk keperluan penyimpanan data lokal (*local storage*) di perangkat.
+- Membuat halaman login (`LoginPage`) menggunakan `StatefulWidget` dan `TextEditingController` untuk menerima input username dan password pengguna.
+- Menyimpan sesi username pengguna ke dalam local storage menggunakan `SharedPreferences.setString` ketika proses autentikasi berhasil.
+- Menampilkan dialog notifikasi (`AlertDialog`) melalui fungsi `_showDialog` untuk memberikan umpan balik informasi keberhasilan atau kegagalan login.
+- Mengalihkan pengguna ke halaman beranda (`HomePage`) setelah login berhasil menggunakan navigasi `Navigator.push` dan `MaterialPageRoute`.
+- Membaca dan menampilkan kembali username yang tersimpan secara dinamis pada `HomePage` menggunakan fungsi `SharedPreferences.getString`.
+- Membuat menu navigasi samping atau drawer (`Sidemenu`) menggunakan widget `Drawer`, `DrawerHeader`, dan `ListTile` untuk berpindah rute antar halaman (`HomePage` dan `AboutPage`).
+- Membuat halaman informasi (`AboutPage`) yang dilengkapi dengan komponen drawer yang sama sehingga navigasi antar halaman berlangsung secara konsisten.
