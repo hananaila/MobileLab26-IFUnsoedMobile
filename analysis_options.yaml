@@ -1,0 +1,24 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    strict_top_level_inference: ignore
+    unused_field: ignore
+    prefer_final_fields: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - modul1_dart/**
+    - Pertemuan 1/**
+    - toko-api/**
+
+linter:
+  rules:
+    use_key_in_widget_constructors: false
+    prefer_const_constructors: true
+    avoid_print: false

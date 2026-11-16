@@ -45,3 +45,17 @@ Pada praktikum Modul 3 ini, saya belajar mengimplementasikan sistem autentikasi 
 - Membaca dan menampilkan kembali username yang tersimpan secara dinamis pada `HomePage` menggunakan fungsi `SharedPreferences.getString`.
 - Membuat menu navigasi samping atau drawer (`Sidemenu`) menggunakan widget `Drawer`, `DrawerHeader`, dan `ListTile` untuk berpindah rute antar halaman (`HomePage` dan `AboutPage`).
 - Membuat halaman informasi (`AboutPage`) yang dilengkapi dengan komponen drawer yang sama sehingga navigasi antar halaman berlangsung secara konsisten.
+
+---
+
+## Hasil Praktikum Modul 4 (Operasi CRUD dengan API CodeIgniter 4)
+
+<!-- Ganti baris di bawah ini dengan link video rekaman atau screenshot demo aplikasi Anda -->
+<!-- Format: https://github.com/user-attachments/assets/<ID-FILE> -->
+
+Pada praktikum Modul 4 ini, saya belajar membangun backend RESTful API menggunakan CodeIgniter 4 serta merancang arsitektur aplikasi mobile Flutter "Toko Kita" yang siap terhubung dengan web service. Hal-hal yang telah saya terapkan meliputi:
+- Menyiapkan database MySQL `toko_api` di Laragon dengan tabel `member`, `member_token`, dan `produk`.
+- Mengembangkan RESTful API menggunakan CodeIgniter 4 dengan endpoint registrasi user, autentikasi login dengan verifikasi password hash dan generate token, serta layanan operasi CRUD produk lengkap.
+- Membuat model data pada Flutter (`Login`, `Registrasi`, `Produk`) menggunakan factory constructor `fromJson` untuk memetakan data respon JSON dari API.
+- Membangun antarmuka form registrasi (`RegistrasiPage`) dan form login (`LoginPage`) dengan validasi input formulir dan penanganan konfirmasi password.
+- Membangun halaman katalog data produk (`ProdukPage`), form tambah dan ubah produk yang dinamis (`ProdukForm`), serta halaman detail produk (`ProdukDetail`) yang dilengkapi dialog konfirmasi hapus data.
