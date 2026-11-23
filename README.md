@@ -21,3 +21,24 @@ Pada praktikum Modul 4 ini, saya merancang backend RESTful API serta antarmuka d
 | <img src="screenshots/tokokita/modul4/registrasi.png" width="240" /> | <img src="screenshots/tokokita/modul4/login.png" width="240" /> |
 | **Form Tambah Produk** | **Detail Produk** |
 | <img src="screenshots/tokokita/modul4/tambahproduct.png" width="240" /> | <img src="screenshots/tokokita/modul4/detailproduct.png" width="240" /> |
+
+---
+
+## Hasil Praktikum Modul 5 (Integrasi REST API, Helper Modul, BLoC & Full CRUD Toko Kita)
+
+Pada praktikum Modul 5 ini, saya menyelesaikan integrasi penuh aplikasi Flutter Toko Kita dengan backend RESTful API:
+- Mengintegrasikan komunikasi HTTP antara aplikasi mobile Flutter dan backend REST API menggunakan package `http` serta persistensi sesi lokal melalui `shared_preferences`.
+- Membangun modul helper pendukung: `UserInfo` untuk menyimpan token dan user ID, `AppException` untuk standarisasi penanganan galat (*error handling*), `Api` sebagai klien HTTP (GET, POST, DELETE) berotorisasi *Bearer Token*, dan `ApiUrl` untuk sentralisasi endpoint API.
+- Mengimplementasikan arsitektur BLoC (*Business Logic Component*) melalui `RegistrasiBloc`, `LoginBloc`, `LogoutBloc`, dan `ProdukBloc` untuk memisahkan alur logika bisnis API dari layer presentasi UI.
+- Membuat widget dialog kustom (`SuccessDialog` dan `WarningDialog`) untuk menampilkan pesan status operasi secara jelas dan responsif kepada pengguna.
+- Menyempurnakan alur antarmuka pengguna: auto-login pada `main.dart` berbasis ketersediaan token, registrasi akun baru, login dan logout sesi, visualisasi katalog produk dinamis via `FutureBuilder`, serta operasi manipulasi data (Create, Read, Update, Delete) produk secara *real-time* ke basis data MySQL.
+
+### Dokumentasi Screenshot Modul 5
+
+| Registrasi Berhasil | List Produk (REST API) |
+| :---: | :---: |
+| <img src="screenshots/tokokita/modul5/registrasisukses.png" width="240" /> | <img src="screenshots/tokokita/modul5/listproduct.png" width="240" /> |
+| **Form Ubah Produk (Update)** | **Dialog Hapus Produk (Delete)** |
+| <img src="screenshots/tokokita/modul5/editproduct.png" width="240" /> | <img src="screenshots/tokokita/modul5/deleteproduct.png" width="240" /> |
+| **Validasi / Registrasi Gagal** | |
+| <img src="screenshots/tokokita/modul5/registrasigagal.png" width="240" /> | |

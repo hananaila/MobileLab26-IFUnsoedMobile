@@ -1,4 +1,6 @@
 ﻿import 'package:flutter/material.dart';
+import '../bloc/logout_bloc.dart';
+import '../bloc/produk_bloc.dart';
 import '../model/produk.dart';
 import 'login_page.dart';
 import 'produk_detail.dart';
@@ -36,56 +38,53 @@ class _ProdukPageState extends State<ProdukPage> {
       drawer: Drawer(
         child: ListView(
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Center(
-                child: Text(
-                  'Toko Kita Menu',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ),
             ListTile(
               title: const Text('Logout'),
               trailing: const Icon(Icons.logout),
               onTap: () async {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
+                await LogoutBloc.logout().then((value) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                });
               },
             )
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          ItemProduk(
-            produk: Produk(
-              id: 1,
-              kodeProduk: 'A001',
-              namaProduk: 'Kamera',
-              hargaProduk: 5000000,
-            ),
-          ),
-          ItemProduk(
-            produk: Produk(
-              id: 2,
-              kodeProduk: 'A002',
-              namaProduk: 'Kulkas',
-              hargaProduk: 2500000,
-            ),
-          ),
-          ItemProduk(
-            produk: Produk(
-              id: 3,
-              kodeProduk: 'A003',
-              namaProduk: 'Mesin Cuci',
-              hargaProduk: 2000000,
-            ),
-          ),
-        ],
+      body: FutureBuilder<List<Produk>>(
+        future: ProdukBloc.getProduks(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            // ignore: avoid_print
+            print(snapshot.error);
+          }
+          return snapshot.hasData
+              ? ListProduk(list: snapshot.data)
+              : const Center(
+                  child: CircularProgressIndicator(),
+                );
+        },
       ),
+    );
+  }
+}
+
+class ListProduk extends StatelessWidget {
+  final List<Produk>? list;
+
+  const ListProduk({super.key, this.list});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: list == null ? 0 : list!.length,
+      itemBuilder: (context, i) {
+        return ItemProduk(
+          produk: list![i],
+        );
+      },
     );
   }
 }
@@ -111,7 +110,7 @@ class ItemProduk extends StatelessWidget {
       child: Card(
         child: ListTile(
           title: Text(produk.namaProduk ?? ''),
-          subtitle: Text(produk.hargaProduk?.toString() ?? ''),
+          subtitle: Text(produk.hargaProduk.toString()),
         ),
       ),
     );

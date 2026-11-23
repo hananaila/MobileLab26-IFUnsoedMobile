@@ -1,6 +1,9 @@
 ﻿import 'package:flutter/material.dart';
+import '../bloc/produk_bloc.dart';
 import '../model/produk.dart';
+import '../widget/warning_dialog.dart';
 import 'produk_form.dart';
+import 'produk_page.dart';
 
 // ignore: must_be_immutable
 class ProdukDetail extends StatefulWidget {
@@ -25,21 +28,21 @@ class _ProdukDetailState extends State<ProdukDetail> {
           children: [
             const SizedBox(height: 20),
             Text(
-              "Kode : ${widget.produk?.kodeProduk ?? ''}",
+              "Kode : ${widget.produk!.kodeProduk}",
               style: const TextStyle(fontSize: 20.0),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
-              "Nama : ${widget.produk?.namaProduk ?? ''}",
+              "Nama : ${widget.produk!.namaProduk}",
               style: const TextStyle(fontSize: 18.0),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
-              "Harga : Rp. ${widget.produk?.hargaProduk?.toString() ?? ''}",
+              "Harga : Rp. ${widget.produk!.hargaProduk.toString()}",
               style: const TextStyle(fontSize: 18.0),
             ),
             const SizedBox(height: 20),
-            _tombolHapusEdit(),
+            _tombolHapusEdit()
           ],
         ),
       ),
@@ -52,7 +55,6 @@ class _ProdukDetailState extends State<ProdukDetail> {
       children: [
         // Tombol Edit
         OutlinedButton(
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
           child: const Text("EDIT"),
           onPressed: () {
             Navigator.push(
@@ -68,7 +70,6 @@ class _ProdukDetailState extends State<ProdukDetail> {
         const SizedBox(width: 10),
         // Tombol Hapus
         OutlinedButton(
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
           child: const Text("DELETE"),
           onPressed: () => confirmHapus(),
         ),
@@ -84,18 +85,27 @@ class _ProdukDetailState extends State<ProdukDetail> {
         OutlinedButton(
           child: const Text("Ya"),
           onPressed: () {
-            Navigator.pop(context); // Tutup dialog
-            Navigator.pop(context); // Kembali ke list
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Data produk berhasil dihapus")),
-            );
+            ProdukBloc.deleteProduk(id: widget.produk!.id).then((value) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const ProdukPage(),
+                ),
+              );
+            }, onError: (error) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => const WarningDialog(
+                  description: "Hapus data gagal, silahkan coba lagi",
+                ),
+              );
+            });
           },
         ),
         // Tombol batal
         OutlinedButton(
           child: const Text("Batal"),
           onPressed: () => Navigator.pop(context),
-        ),
+        )
       ],
     );
 

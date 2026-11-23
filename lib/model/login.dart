@@ -11,9 +11,13 @@
     return Login(
       code: obj['code'],
       status: obj['status'],
-      token: obj['data']['token'],
-      userID: obj['data']['user']['id'],
-      userEmail: obj['data']['user']['email'],
+      token: obj['data']?['token'],
+      userID: obj['data']?['user']?['id'] == null
+          ? null
+          : (obj['data']['user']['id'] is int
+              ? obj['data']['user']['id']
+              : int.tryParse(obj['data']['user']['id'].toString())),
+      userEmail: obj['data']?['user']?['email'],
     );
   }
 }

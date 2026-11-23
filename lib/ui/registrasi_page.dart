@@ -1,4 +1,7 @@
 ﻿import 'package:flutter/material.dart';
+import '../bloc/registrasi_bloc.dart';
+import '../widget/success_dialog.dart';
+import '../widget/warning_dialog.dart';
 
 class RegistrasiPage extends StatefulWidget {
   const RegistrasiPage({super.key});
@@ -15,7 +18,6 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
   final _namaTextboxController = TextEditingController();
   final _emailTextboxController = TextEditingController();
   final _passwordTextboxController = TextEditingController();
-  final _konfirmasiPasswordTextboxController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
                 _emailTextField(),
                 _passwordTextField(),
                 _passwordKonfirmasiTextField(),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 _buttonRegistrasi(),
               ],
             ),
@@ -97,13 +99,12 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
     );
   }
 
-  // Membuat Textbox Konfirmasi Password
+  // Membuat textbox Konfirmasi Password
   Widget _passwordKonfirmasiTextField() {
     return TextFormField(
       decoration: const InputDecoration(labelText: "Konfirmasi Password"),
       keyboardType: TextInputType.text,
       obscureText: true,
-      controller: _konfirmasiPasswordTextboxController,
       validator: (value) {
         if (value != _passwordTextboxController.text) {
           return "Konfirmasi Password tidak sama";
@@ -116,15 +117,49 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
   // Membuat Tombol Registrasi
   Widget _buttonRegistrasi() {
     return ElevatedButton(
-      child: const Text("Registrasi"),
+      child: _isLoading
+          ? const CircularProgressIndicator(color: Colors.white)
+          : const Text("Registrasi"),
       onPressed: () {
         var validate = _formKey.currentState!.validate();
         if (validate) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Validasi Registrasi Berhasil!")),
-          );
+          if (!_isLoading) _submit();
         }
       },
     );
+  }
+
+  void _submit() {
+    _formKey.currentState!.save();
+    setState(() {
+      _isLoading = true;
+    });
+    RegistrasiBloc.registrasi(
+      nama: _namaTextboxController.text,
+      email: _emailTextboxController.text,
+      password: _passwordTextboxController.text,
+    ).then((value) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => SuccessDialog(
+          description: "Registrasi berhasil, silahkan login",
+          okClick: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }, onError: (error) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => const WarningDialog(
+          description: "Registrasi gagal, silahkan coba lagi",
+        ),
+      );
+    });
+    setState(() {
+      _isLoading = false;
+    });
   }
 }

@@ -1,6 +1,9 @@
 ﻿import 'package:flutter/material.dart';
-import 'registrasi_page.dart';
+import '../bloc/login_bloc.dart';
+import '../helpers/user_info.dart';
+import '../widget/warning_dialog.dart';
 import 'produk_page.dart';
+import 'registrasi_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -78,17 +81,47 @@ class _LoginPageState extends State<LoginPage> {
   // Membuat Tombol Login
   Widget _buttonLogin() {
     return ElevatedButton(
-      child: const Text("Login"),
+      child: _isLoading
+          ? const CircularProgressIndicator(color: Colors.white)
+          : const Text("Login"),
       onPressed: () {
         var validate = _formKey.currentState!.validate();
         if (validate) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const ProdukPage()),
-          );
+          if (!_isLoading) _submit();
         }
       },
     );
+  }
+
+  void _submit() {
+    _formKey.currentState!.save();
+    setState(() {
+      _isLoading = true;
+    });
+    LoginBloc.login(
+      email: _emailTextboxController.text,
+      password: _passwordTextboxController.text,
+    ).then((value) async {
+      await UserInfo().setToken(value.token.toString());
+      await UserInfo().setUserID(int.parse(value.userID.toString()));
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProdukPage()),
+        );
+      }
+    }, onError: (error) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => const WarningDialog(
+          description: "Login gagal, silahkan coba lagi",
+        ),
+      );
+    });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   // Membuat menu untuk membuka halaman registrasi
